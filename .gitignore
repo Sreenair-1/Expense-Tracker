@@ -1,1 +1,2 @@
-server/.env
+vars/
+node_modules/
