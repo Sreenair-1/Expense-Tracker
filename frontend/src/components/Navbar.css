@@ -1,0 +1,38 @@
+/* src/components/Navbar.css */
+
+/* Navbar container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #000;  /* Black background */
+  color: gold;
+}
+
+/* Left side of navbar */
+.navbar-left {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-logo {
+  color: gold;
+  font-family: 'Orbitron', sans-serif;  /* Use Orbitron font */
+}
+
+/* Right side of navbar with links */
+.navbar-right {
+  font-size: 1rem;
+}
+
+.navbar-link {
+  color: gold;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar-link:hover {
+  text-decoration: underline;
+}
