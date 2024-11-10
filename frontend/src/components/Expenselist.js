@@ -7,9 +7,9 @@
         <h2>Expenses</h2>
         {expenses.map((expense) => (
           <div key={expense.id} className="expense-item">
-            <span>{expense.name}</span>
-            <span>${expense.amount.toFixed(2)}</span>
-            <span>{expense.date}</span>
+            <span>   {expense.name}</span>
+            <span> / ₹{expense.amount.toFixed(2)}</span>
+            <span> / {expense.date}</span>
           </div>
         ))}
       </div>
