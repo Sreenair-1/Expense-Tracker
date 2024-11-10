@@ -1,70 +1,73 @@
-/* src/pages/Home.css */
-
+/* Global Styling */
 .home {
-    display: flex;
-    justify-content: center;      /* Centers horizontally */
-    align-items: center;          /* Centers vertically */
-    height: 100vh;                /* Takes full height of the viewport */
-    margin: 0;
-    background-color: #111;       /* Dark background */
-  }
-  
+  display: flex;
+  justify-content: center;  /* Centers horizontally */
+  align-items: center;      /* Centers vertically */
+  height: 100vh;            /* Full height of the viewport */
+  margin: 0;
+  background-color: #111;   /* Dark background */
+}
+
+/* Hero Section Styling */
+.hero-card {
+  background: #222;         /* Slightly lighter background for the card */
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);  /* Shadow effect */
+  width: 80%;
+  max-width: 600px;         /* Max width for larger screens */
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
   .hero-card {
-    background: #222;             /* Slightly lighter background for the card */
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);  /* Shadow effect */
-    width: 80%;
-    max-width: 600px;             /* Max width for large screens */
-    text-align: center;
-    transition: all 0.3s ease;    /* Smooth transition for responsiveness */
+    width: 90%;
+    padding: 30px;
   }
-  
-  /* For responsive sizing */
-  @media (max-width: 768px) {
-    .hero-card {
-      width: 90%;                 /* Adjust width on smaller screens */
-      padding: 30px;              /* Adjust padding */
-    }
+}
+
+@media (max-width: 480px) {
+  .hero-card {
+    width: 95%;
+    padding: 20px;
   }
-  
-  @media (max-width: 480px) {
-    .hero-card {
-      width: 95%;                 /* Further adjustment on very small screens */
-      padding: 20px;              /* Less padding on very small screens */
-    }
-  }
-  
-  .title {
-    font-family: 'Orbitron', sans-serif; /* Orbitron font */
-    font-size: 3rem;         /* Larger font size */
-    color: #f1c40f;          /* Gold text color */
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    transition: all 0.3s ease; /* Smooth animation when font changes */
-  }
-  
-  .subtitle {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.2rem;
-    color: #ddd;
-    margin-bottom: 20px;
-    transition: all 0.3s ease;
-  }
-  
-  .cta-button {
-    background-color: #f1c40f; /* Gold button */
-    color: #111;               /* Dark text color */
-    border: none;
-    padding: 12px 25px;
-    font-size: 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Add transform transition */
-  }
-  
-  .cta-button:hover {
-    background-color: #e0b90f; /* Slightly darker gold on hover */
-    transform: scale(1.1);      /* Slightly enlarge the button when hovered */
-  }
-  
+}
+
+/* Title Styling */
+.title {
+  font-family: 'Orbitron', sans-serif;  /* Futuristic font */
+  font-size: 3rem;         /* Large font size */
+  color: #f1c40f;          /* Gold text color */
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Subtitle Styling */
+.subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  color: #ddd;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Button Styling */
+.cta-button {
+  background-color: #f1c40f; /* Gold button */
+  color: #111;               /* Dark text color */
+  border: none;
+  padding: 12px 25px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Animation on hover */
+}
+
+.cta-button:hover {
+  background-color: #e0b90f; /* Slightly darker gold */
+  transform: scale(1.1);      /* Button grows slightly on hover */
+}

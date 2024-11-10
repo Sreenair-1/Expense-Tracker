@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getExpenses, addExpense, deleteExpense } = require('../controllers/expenseController');
+const { getExpenses, addExpense, deleteExpense, updateExpense } = require('../controllers/expenseController');
 
 router.get('/', getExpenses);
 router.post('/', addExpense);
