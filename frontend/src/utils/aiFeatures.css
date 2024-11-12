@@ -2,7 +2,8 @@
 
 /* AI Insights Container */
 .ai-insights-container {
-    background-color: #222; /* Dark background for AI section */
+    background-color: #222;
+    /* Dark background for AI section */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
@@ -10,66 +11,65 @@
     max-width: 800px;
     margin: 20px auto;
     color: #f1c40f;
-  }
-  
-  /* Title of the AI Insights Section */
-  .ai-insights-container h2 {
+}
+
+/* Title of the AI Insights Section */
+.ai-insights-container h2 {
     font-size: 2rem;
     font-weight: bold;
     color: #f1c40f;
     margin-bottom: 15px;
     text-align: center;
-  }
-  
-  /* Summary Paragraph */
-  .ai-summary {
+}
+
+/* Summary Paragraph */
+.ai-summary {
     font-size: 1.2rem;
     color: #ddd;
     margin-bottom: 20px;
     text-align: center;
     line-height: 1.5;
-  }
-  
-  /* Insights List */
-  .ai-insights-container ul {
+}
+
+/* Insights List */
+.ai-insights-container ul {
     list-style: none;
     padding-left: 0;
     color: #ddd;
-  }
-  
-  .ai-insights-container li {
+}
+
+.ai-insights-container li {
     margin-bottom: 12px;
     font-size: 1.1rem;
     padding-left: 20px;
     position: relative;
-  }
-  
-  /* Add a small bullet point to the list items */
-  .ai-insights-container li::before {
+}
+
+/* Add a small bullet point to the list items */
+.ai-insights-container li::before {
     content: "•";
     position: absolute;
     left: 0;
     color: #f1c40f;
     font-size: 1.5rem;
     top: 0;
-  }
-  
-  /* Responsive Design for Mobile */
-  @media (max-width: 768px) {
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
     .ai-insights-container {
-      padding: 15px;
+        padding: 15px;
     }
-  
+
     .ai-insights-container h2 {
-      font-size: 1.5rem;
+        font-size: 1.5rem;
     }
-  
+
     .ai-summary {
-      font-size: 1rem;
+        font-size: 1rem;
     }
-  
+
     .ai-insights-container li {
-      font-size: 1rem;
+        font-size: 1rem;
     }
-  }
-  
+}

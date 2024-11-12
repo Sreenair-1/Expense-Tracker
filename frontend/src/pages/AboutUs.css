@@ -4,29 +4,29 @@
     color: #f1c40f;
     padding: 40px;
     text-align: center;
-  }
-  
-  .about-us h1 {
+}
+
+.about-us h1 {
     font-size: 3rem;
     margin-bottom: 10px;
     letter-spacing: 2px;
-  }
-  
-  .about-us p {
+}
+
+.about-us p {
     font-size: 1.2rem;
     margin-bottom: 30px;
     color: #ddd;
-  }
-  
-  .team-container {
+}
+
+.team-container {
     display: flex;
     justify-content: center;
     gap: 40px;
     flex-wrap: wrap;
     margin-top: 40px;
-  }
-  
-  .team-member {
+}
+
+.team-member {
     background: #222;
     padding: 20px;
     border-radius: 15px;
@@ -34,52 +34,52 @@
     width: 250px;
     text-align: center;
     transition: transform 0.3s ease;
-  }
-  
-  .team-member:hover {
-    transform: translateY(-10px); /* Slight lift effect */
-  }
-  
-  .team-image {
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    /* Slight lift effect */
+}
+
+.team-image {
     width: 100%;
     height: 250px;
     object-fit: cover;
     border-radius: 50%;
     margin-bottom: 15px;
-  }
-  
-  .team-member h2 {
+}
+
+.team-member h2 {
     font-size: 1.5rem;
     color: #f1c40f;
     margin-bottom: 5px;
-  }
-  
-  .team-member h3 {
+}
+
+.team-member h3 {
     font-size: 1.2rem;
     color: #ddd;
     margin-bottom: 15px;
-  }
-  
-  .team-member p {
+}
+
+.team-member p {
     font-size: 1rem;
     color: #bbb;
-  }
-  
-  /* Responsiveness */
-  @media (max-width: 768px) {
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
     .team-container {
-      gap: 20px;
+        gap: 20px;
     }
-  
+
     .team-member {
-      width: 200px;
+        width: 200px;
     }
-  }
-  
-  @media (max-width: 480px) {
+}
+
+@media (max-width: 480px) {
     .team-member {
-      width: 160px;
-      padding: 15px;
+        width: 160px;
+        padding: 15px;
     }
-  }
-  
+}
