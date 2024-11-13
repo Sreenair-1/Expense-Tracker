@@ -10,22 +10,22 @@ exports.getExpenses = async (req, res) => {
 };
 
 exports.addExpense = async (req, res) => {
-    const { title, amount, date } = req.body;
+    const { title, amount, date, category } = req.body;
     try {
-        const newExpense = new Expense({ title, amount, date });
+        const newExpense = new Expense({ title, amount, date, category });
         await newExpense.save();
         res.status(201).json(newExpense);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(500).json({ message: 'Error adding expense', error });
     }
 };
 
 exports.updateExpense = async (req, res) => {
-    const { title, amount, date } = req.body;
+    const { title, amount, date, category } = req.body;
     try {
         const updatedExpense = await Expense.findByIdAndUpdate(
             req.params.id,
-            { title, amount, date },
+            { title, amount, date, category },
             { new: true }
         );
         if (!updatedExpense) {

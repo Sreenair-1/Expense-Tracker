@@ -129,6 +129,22 @@
     color: #f1c40f;
 }
 
+/* Alignment for name, amount, and date in expense item */
+.expense-item .expense-name {
+    flex: 2;
+    text-align: left;
+}
+
+.expense-item .expense-amount {
+    flex: 1;
+    text-align: center;
+}
+
+.expense-item .expense-date {
+    flex: 1;
+    text-align: right;
+}
+
 .expense-item span {
     font-size: 1rem;
 }
@@ -164,32 +180,32 @@
 .ai-insights li {
     margin-bottom: 10px;
     font-size: 1rem;
+}
 
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .dashboard {
-            padding: 20px;
-        }
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dashboard {
+        padding: 20px;
+    }
 
-        .add-expense-form,
-        .expense-list,
-        .ai-insights {
-            width: 100%;
-            padding: 15px;
-        }
+    .add-expense-form,
+    .expense-list,
+    .ai-insights {
+        width: 100%;
+        padding: 15px;
+    }
 
-        .expense-item {
-            font-size: 0.9rem;
-            padding: 10px;
-        }
+    .expense-item {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
 
-        .charts-container {
-            flex-direction: column;
-            gap: 20px;
-        }
+    .charts-container {
+        flex-direction: column;
+        gap: 20px;
+    }
 
-        .chart-item {
-            width: 100%;
-        }
+    .chart-item {
+        width: 100%;
     }
 }

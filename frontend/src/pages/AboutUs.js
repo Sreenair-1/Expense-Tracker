@@ -4,31 +4,23 @@ import './AboutUs.css';
 const teamMembers = [
     {
         id: 1,
-        name: "",
-        role: "",
-        image: "",  // Replace with the actual image path
-        description: ""
+        name: "Garvit Tyagi",
+        image: "garvit.jpg"
     },
     {
         id: 2,
-        name: "",
-        role: "",
-        image: "",  // Replace with the actual image path
-        description: ""
+        name: "Janak Fabyani",
+        image: "janak.jpg"
     },
     {
         id: 3,
-        name: "",
-        role: "",
-        image: "",  // Replace with the actual image path
-        description: ""
+        name: "Manav Dalwani",
+        image: "manav.jpg"
     },
     {
         id: 4,
-        name: "",
-        role: "",
-        image: "",  // Replace with the actual image path
-        description: ""
+        name: "Sreehari Nair",
+        image: "sree.jpg"
     }
 ];
 
@@ -42,8 +34,6 @@ const AboutUs = () => {
                     <div key={member.id} className="team-member">
                         <img src={`images/${member.image}`} alt={member.name} className="team-image" />
                         <h2>{member.name}</h2>
-                        <h3>{member.role}</h3>
-                        <p>{member.description}</p>
                     </div>
                 ))}
             </div>

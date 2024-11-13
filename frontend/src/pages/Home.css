@@ -9,7 +9,14 @@
     /* Full height of the viewport */
     margin: 0;
     background-color: #111;
-    /* Dark background */
+    /* Assuming your main container is called `.main-container` */
+    background-image: url('https://watermark.lovepik.com/photo/40148/1606.jpg_wh1200.jpg'); /* Replace with your image path */
+    background-size: cover; /* Scales the image to cover the whole area */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat;
+    padding: 20px; /* Adjust padding if needed */
+  
+  
 }
 
 /* Hero Section Styling */

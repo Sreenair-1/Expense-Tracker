@@ -2,7 +2,7 @@
 .expense-chart-container {
     width: 100%;
     max-width: 600px;
-    height: 400px;
+    height: 10px;
     margin: 20px 0;
     background-color: #333;
     /* Dark background to match your theme */

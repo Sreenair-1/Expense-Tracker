@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ExpenseList from '../components/ExpenseList';
 import AddExpenseForm from '../components/AddExpenseForm';
-import { categorizeExpense, generateInsights, generateSummary } from '../utils/aiFeatures';
 import { Line } from 'react-chartjs-2';
 import { Pie } from 'react-chartjs-2';
+import { categorizeExpense, generateInsights, generateSummary } from '../utils/aiFeatures';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Title, Tooltip, Legend } from 'chart.js';
 import './Dashboard.css';
 
+// Register the necessary components for Chart.js
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Title, Tooltip, Legend);
 
 const Dashboard = () => {
@@ -16,11 +17,30 @@ const Dashboard = () => {
     // Fetch expenses from the backend
     useEffect(() => {
         const fetchExpenses = async () => {
+            const token = localStorage.getItem('token'); // Make sure you have the token
+            if (!token) {
+                console.error('No token found');
+                return;
+            }
+        
             try {
-                const response = await fetch(`http://localhost:3000/api/expenses`);
+                const response = await fetch(`http://localhost:3000/api/expenses`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`, // Include token in headers
+                    },
+                });
                 const data = await response.json();
-                console.log("Fetched expenses:", data); // Log fetched expenses
-                setExpenses(data);
+                console.log("Fetched expenses:", data); // Log the data
+        
+                // Check if data is an array
+                if (Array.isArray(data)) {
+                    setExpenses(data);
+                } else {
+                    console.error('Expected an array but got:', data);
+                    setExpenses([]); // Set to empty array if not an array
+                }
             } catch (error) {
                 console.error('Error fetching expenses:', error);
             }
@@ -28,11 +48,13 @@ const Dashboard = () => {
         fetchExpenses();
     }, []);
 
+    // Function to add an expense
     const addExpense = async (expense) => {
         const categorizedExpense = {
             ...expense,
             category: categorizeExpense(expense.name),
         };
+        console.log("Categorized Expense:", categorizedExpense); // Debugging line
         try {
             const response = await fetch(`http://localhost:3000/api/expenses`, {
                 method: 'POST',
@@ -41,10 +63,11 @@ const Dashboard = () => {
                 },
                 body: JSON.stringify(categorizedExpense),
             });
+            console.log("Response from server:", response); // Debugging line
             if (response.ok) {
                 const newExpense = await response.json();
                 console.log("Added expense:", newExpense); // Log the new expense
-                setExpenses([...expenses, newExpense]);
+                setExpenses((prevExpenses) => [...prevExpenses, newExpense]); // Update state correctly
             } else {
                 console.error('Failed to add expense:', response.statusText);
             }
@@ -52,24 +75,23 @@ const Dashboard = () => {
             console.error('Error adding expense:', error);
         }
     };
+
+    // Generate insights and summary
     const insights = generateInsights(expenses);
     const summary = generateSummary(expenses);
 
+    // Update category data whenever expenses change
     useEffect(() => {
         const categories = expenses.reduce((acc, expense) => {
-            if (acc[expense.category]) {
-                acc[expense.category] += expense.amount;
-            } else {
-                acc[expense.category] = expense.amount;
-            }
+            acc[expense.category] = (acc[expense.category] || 0) + expense.amount;
             return acc;
         }, {});
-
         setCategoryData(categories);
     }, [expenses]);
 
+    // Prepare data for line chart
     const lineChartData = {
-        labels: expenses.map((expense) => expense.date),
+        labels: expenses.map((expense) => new Date(expense.date).toLocaleDateString()), // Format date for x-axis
         datasets: [
             {
                 label: 'Amount Spent',
@@ -81,6 +103,7 @@ const Dashboard = () => {
         ],
     };
 
+    // Prepare data for pie chart
     const pieChartData = {
         labels: Object.keys(categoryData),
         datasets: [

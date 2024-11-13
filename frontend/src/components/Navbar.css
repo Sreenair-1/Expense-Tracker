@@ -3,14 +3,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    background-color: #000;
-    color: gold;
+    padding: 10px 20px;
+    background-color: #333;
 }
 
 .navbar-left {
-    font-size: 1.5rem;
-    font-weight: bold;
+    flex: 1;
 }
 
 .navbar-logo {
@@ -19,16 +17,32 @@
 }
 
 .navbar-right {
-    font-size: 1rem;
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .navbar-link {
-    color: gold;
-    margin-left: 20px;
+    color: white;
     text-decoration: none;
-    font-weight: bold;
+    padding: 10px;
+    margin-left: 15px;
+    transition: background-color 0.3s ease;
 }
 
 .navbar-link:hover {
-    text-decoration: underline;
+    color: #f1c40f;
+}
+
+.logout-button {
+    background-color: #333;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #444;
 }
