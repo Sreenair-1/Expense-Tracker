@@ -9,7 +9,6 @@ function Login() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Redirect if the user is already logged in
         if (localStorage.getItem('user')) {
             navigate('/dashboard');
         }
@@ -17,24 +16,20 @@ function Login() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        console.log(`Logging in with email: ${email}`); // Log the email being used to log in
-
         if (email && password) {
             try {
                 const response = await axios.post('http://localhost:3000/api/users/login', {
                     email,
                     password
                 });
-                console.log('Login response:', response.data); // Log the response from the server
                 localStorage.setItem('user', JSON.stringify(response.data.user));
-                navigate('/dashboard');  // Redirect to Dashboard after login
+                navigate('/dashboard');
             } catch (error) {
-                const errorMessage = error.response.data.message || 'An error occurred during login.';
-                console.error('Error logging in:', errorMessage);
-                alert(errorMessage); // Display error message to user
+                const errorMessage = error.response?.data?.message || 'An error occurred during login.';
+                alert(errorMessage);
             }
         } else {
-            console.error('Email or password is empty');
+            alert('Please enter both email and password.');
         }
     };
 
