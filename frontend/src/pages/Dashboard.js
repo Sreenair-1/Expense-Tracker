@@ -3,7 +3,7 @@ import ExpenseList from '../components/ExpenseList';
 import AddExpenseForm from '../components/AddExpenseForm';
 import { Line } from 'react-chartjs-2';
 import { Pie } from 'react-chartjs-2';
-import { categorizeExpense, generateInsights, generateSummary } from '../utils/aiFeatures';
+import { generateInsights, generateSummary } from '../utils/aiFeatures';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Title, Tooltip, Legend } from 'chart.js';
 import './Dashboard.css';
 
@@ -51,9 +51,10 @@ const Dashboard = () => {
     const addExpense = async (expense) => {
         const categorizedExpense = {
             ...expense,
-            category: categorizeExpense(expense.title),
+            // Use the category directly from the expense object
+            category: expense.category,
         };
-        console.log("Categorized Expense:", categorizedExpense);
+        console.log("Categorized Expense:", categorizedExpense); // Debugging line
         try {
             const response = await fetch(`http://localhost:3000/api/expenses`, {
                 method: 'POST',

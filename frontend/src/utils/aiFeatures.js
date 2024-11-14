@@ -1,16 +1,6 @@
 // src/utils/aiFeatures.js
-// Basic categorization function
-export const categorizeExpense = (title) => {
-    if (/grocery|food|restaurant/i.test(title)) return 'Food';
-    if (/rent|mortgage/i.test(title)) return 'Housing';
-    if (/electricity|water|utilities/i.test(title)) return 'Utilities';
-    if (/gas|fuel|transport/i.test(title)) return 'Transportation';
-    return 'Other';
-};
 
 // Generate expense insights
-// Generate expense insights
-
 export const generateInsights = (expenses) => {
 
     if (expenses.length === 0) {
