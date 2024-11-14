@@ -1,5 +1,9 @@
 import React from 'react';
 import './AboutUs.css';
+import garvitImage from '../images/garvit.jpg';
+import sreeImage from '../images/sree.jpg';
+import manavImage from '../images/manav.jpg';
+import janakImage from '../images/janak.jpg';
 
 
 
@@ -7,22 +11,22 @@ const teamMembers = [
   {
     id: 1,
     name: "Garvit Tyagi",
-    image: "../images/garvit.jpg"
+    image: garvitImage
   },
   {
     id: 2,
     name: "Sreehari Nair",
-    image: "../images/sree.jpg"
+    image: sreeImage
   },
   {
     id: 3,
     name: "Manav Dalwani",
-    image: "../images/manav.jpg"
+    image: manavImage
   },
   {
     id: 4,
     name: "Janak Fabyani",
-    image: "../images/janak.jpg"
+    image: janakImage
   }
 ];
 

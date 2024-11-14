@@ -1,5 +1,5 @@
 import React from 'react';
-import './ExpenseList.css'; // Import the CSS file for styling
+import './ExpenseList.css';
 
 function ExpenseList({ expenses }) {
     return (
