@@ -1,60 +1,63 @@
 import React, { useState } from 'react';
 
 function AddExpenseForm({ addExpense }) {
-    const [title, setTitle] = useState(''); // State for expense title
-    const [amount, setAmount] = useState(''); // State for expense amount
-    const [date, setDate] = useState(''); // State for expense date
-    const [category, setCategory] = useState(''); // State for expense category
+    const [title, setTitle] = useState(''); 
+    const [amount, setAmount] = useState(''); 
+    const [date, setDate] = useState(''); 
+    const [category, setCategory] = useState(''); 
+    const [error, setError] = useState(null);
 
     const handleSubmit = (e) => {
-        e.preventDefault(); // Prevent default form submission
-        if (!title || !amount || !date || !category) return; // Validate input
+        e.preventDefault(); 
+        if (!title || !amount || !date || !category) {
+            setError('Please fill in all fields');
+            return;
+        }
 
-        // Create new expense object
         const newExpense = {
             title,
-            amount: parseFloat(amount), // Convert amount to a number
+            amount: parseFloat(amount), 
             date,
             category,
         };
 
-        // Call the addExpense function passed from the parent component
         addExpense(newExpense);
 
-        // Reset form fields
         setTitle('');
         setAmount('');
         setDate('');
         setCategory('');
+        setError(null);
     };
 
     return (
         <form onSubmit={handleSubmit} className="expense-form">
             <h2>Add New Expense</h2>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
             <div className="input-group">
                 <input
                     type="text"
                     value={title}
-                    onChange={(e) => setTitle(e.target.value)} // Update title state
+                    onChange={(e) => setTitle(e.target.value)} 
                     placeholder="Expense Title"
                     required
                 />
                 <input
                     type="number"
                     value={amount}
-                    onChange={(e) => setAmount(e.target.value)} // Update amount state
+                    onChange={(e) => setAmount(e.target.value)} 
                     placeholder="Amount"
                     required
                 />
                 <input
                     type="date"
                     value={date}
-                    onChange={(e) => setDate(e.target.value)} // Update date state
+                    onChange={(e) => setDate(e.target.value)} 
                     required
                 />
                 <select
                     value={category}
-                    onChange={(e) => setCategory(e.target.value)} // Update category state
+                    onChange={(e) => setCategory(e.target.value)} 
                     required
                 >
                     <option value="" disabled>Select Category</option>

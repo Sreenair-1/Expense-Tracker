@@ -1,10 +1,10 @@
 // src/utils/aiFeatures.js
 // Basic categorization function
-export const categorizeExpense = (name) => {
-    if (/grocery|food|restaurant/i.test(name)) return 'Food';
-    if (/rent|mortgage/i.test(name)) return 'Housing';
-    if (/electricity|water|utilities/i.test(name)) return 'Utilities';
-    if (/gas|fuel|transport/i.test(name)) return 'Transportation';
+export const categorizeExpense = (title) => {
+    if (/grocery|food|restaurant/i.test(title)) return 'Food';
+    if (/rent|mortgage/i.test(title)) return 'Housing';
+    if (/electricity|water|utilities/i.test(title)) return 'Utilities';
+    if (/gas|fuel|transport/i.test(title)) return 'Transportation';
     return 'Other';
 };
 
@@ -27,7 +27,7 @@ export const generateInsights = (expenses) => {
     });
     return [
         `Total spent: ₹${totalSpent.toFixed(2)}`,
-        `Highest expense: ${highestExpense.name} - ₹${highestExpense.amount.toFixed(2)}`,
+        `Highest expense: ${highestExpense.title} - ₹${highestExpense.amount.toFixed(2)}`,
         `Total transactions: ${expenses.length}`
     ];
 };

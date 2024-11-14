@@ -129,8 +129,8 @@
     color: #f1c40f;
 }
 
-/* Alignment for name, amount, and date in expense item */
-.expense-item .expense-name {
+/* Alignment for title, amount, and date in expense item */
+.expense-item .expense-title {
     flex: 2;
     text-align: left;
 }

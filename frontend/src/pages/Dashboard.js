@@ -7,17 +7,17 @@ import { categorizeExpense, generateInsights, generateSummary } from '../utils/a
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Title, Tooltip, Legend } from 'chart.js';
 import './Dashboard.css';
 
-// Register the necessary components for Chart.js
+
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Title, Tooltip, Legend);
 
 const Dashboard = () => {
     const [expenses, setExpenses] = useState([]);
     const [categoryData, setCategoryData] = useState({});
 
-    // Fetch expenses from the backend
+    
     useEffect(() => {
         const fetchExpenses = async () => {
-            const token = localStorage.getItem('token'); // Make sure you have the token
+            const token = localStorage.getItem('token'); 
             if (!token) {
                 console.error('No token found');
                 return;
@@ -28,18 +28,17 @@ const Dashboard = () => {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`, // Include token in headers
+                        Authorization: `Bearer ${token}`, 
                     },
                 });
                 const data = await response.json();
-                console.log("Fetched expenses:", data); // Log the data
+                console.log("Fetched expenses:", data); 
         
-                // Check if data is an array
                 if (Array.isArray(data)) {
                     setExpenses(data);
                 } else {
                     console.error('Expected an array but got:', data);
-                    setExpenses([]); // Set to empty array if not an array
+                    setExpenses([]);
                 }
             } catch (error) {
                 console.error('Error fetching expenses:', error);
@@ -52,9 +51,9 @@ const Dashboard = () => {
     const addExpense = async (expense) => {
         const categorizedExpense = {
             ...expense,
-            category: categorizeExpense(expense.name),
+            category: categorizeExpense(expense.title),
         };
-        console.log("Categorized Expense:", categorizedExpense); // Debugging line
+        console.log("Categorized Expense:", categorizedExpense);
         try {
             const response = await fetch(`http://localhost:3000/api/expenses`, {
                 method: 'POST',

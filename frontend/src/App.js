@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/SignUp';
 import AboutUs from './pages/AboutUs';
-import Dashboard from './pages/Dashboard';  // Import the Dashboard page
+import Dashboard from './pages/Dashboard'; 
 import Navbar from './components/Navbar';
 
 function App() {
@@ -15,9 +15,9 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />  {/* Signup route */}
+                <Route path="/signup" element={<Signup />} /> 
                 <Route path="/about-us" element={<AboutUs />} />
-                <Route path="/dashboard" element={<Dashboard />} />  {/* Dashboard route */}
+                <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
         </Router>
     );
