@@ -27,7 +27,7 @@ const Navbar = () => {
             <div className="navbar-right">
                 <animated.div style={props}>
                     <Link to="/" className="navbar-link">Home</Link>
-                    <Link to="/about" className="navbar-link">About Us</Link>
+                    <Link to="/about-us" className="navbar-link">About Us</Link>
                     {user ? (
                         <button onClick={handleLogout} className="logout-button">Logout</button>
                     ) : (

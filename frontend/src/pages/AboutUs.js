@@ -7,22 +7,22 @@ const teamMembers = [
   {
     id: 1,
     name: "Garvit Tyagi",
-    image: "garvit.jpg"
+    image: "../images/garvit.jpg"
   },
   {
     id: 2,
-    name: "Janak Fabyani",
-    image: "janak.jpg"
+    name: "Sreehari Nair",
+    image: "../images/sree.jpg"
   },
   {
     id: 3,
     name: "Manav Dalwani",
-    image: "manav.jpg"
+    image: "../images/manav.jpg"
   },
   {
     id: 4,
-    name: "Sreehari Nair",
-    image: "sree.jpg"
+    name: "Janak Fabyani",
+    image: "../images/janak.jpg"
   }
 ];
 
@@ -34,7 +34,7 @@ const AboutUs = () => {
       <div className="team-container">
         {teamMembers.map((member) => (
           <div key={member.id} className="team-member">
-            <img src={`images/${member.image}`} alt={member.name} className="team-image" />
+            <img src={member.image} alt={member.name} className="team-image" />
             <h2>{member.name}</h2>
           </div>
         ))}
