@@ -13,7 +13,7 @@ function ExpenseList({ expenses }) {
                     <div key={expense.id} className="expense-item">
                         <span> {expense.title}</span>
                         <span>  ₹{expense.amount.toFixed(2)}</span>
-                        <span>  {expense.date}</span>
+                        <span>  {new Date(expense.date).toLocaleDateString('en-IN')}</span>
                         <span>  {expense.category}</span>
                     </div>
                     ))}
