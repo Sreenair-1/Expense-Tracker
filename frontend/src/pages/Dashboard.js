@@ -31,31 +31,31 @@ const Dashboard = () => {
         setUser(userData);
 
         // Fetch expenses
+        const fetchExpenses = async () => {
+            try {
+                setIsLoading(true);
+                const data = await expenseAPI.getExpenses();
+                
+                if (Array.isArray(data)) {
+                    setExpenses(data);
+                } else {
+                    console.error('Expected an array but got:', data);
+                    setExpenses([]);
+                }
+            } catch (error) {
+                console.error('Error fetching expenses:', error);
+                if (error.response?.status === 401) {
+                    // Token expired or invalid
+                    authAPI.logout();
+                    navigate('/login');
+                }
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
         fetchExpenses();
     }, [navigate]);
-
-    const fetchExpenses = async () => {
-        try {
-            setIsLoading(true);
-            const data = await expenseAPI.getExpenses();
-            
-            if (Array.isArray(data)) {
-                setExpenses(data);
-            } else {
-                console.error('Expected an array but got:', data);
-                setExpenses([]);
-            }
-        } catch (error) {
-            console.error('Error fetching expenses:', error);
-            if (error.response?.status === 401) {
-                // Token expired or invalid
-                authAPI.logout();
-                navigate('/login');
-            }
-        } finally {
-            setIsLoading(false);
-        }
-    };
 
     // Function to add an expense
     const addExpense = async (expense) => {
