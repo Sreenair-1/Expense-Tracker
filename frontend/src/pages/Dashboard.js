@@ -1,79 +1,102 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ExpenseList from '../components/ExpenseList';
 import AddExpenseForm from '../components/AddExpenseForm';
 import { Line } from 'react-chartjs-2';
 import { Pie } from 'react-chartjs-2';
 import { generateInsights, generateSummary } from '../utils/aiFeatures';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Title, Tooltip, Legend } from 'chart.js';
+import { expenseAPI, authAPI } from '../utils/api';
+import { tokenStorage } from '../utils/secureStorage';
 import './Dashboard.css';
-
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Title, Tooltip, Legend);
 
 const Dashboard = () => {
     const [expenses, setExpenses] = useState([]);
     const [categoryData, setCategoryData] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate();
 
-    
     useEffect(() => {
-        const fetchExpenses = async () => {
-            const token = localStorage.getItem('token'); 
-            if (!token) {
-                console.error('No token found');
-                return;
-            }
-        
-            try {
-                const response = await fetch(`http://localhost:3000/api/expenses`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`, 
-                    },
-                });
-                const data = await response.json();
-                console.log("Fetched expenses:", data); 
-        
-                if (Array.isArray(data)) {
-                    setExpenses(data);
-                } else {
-                    console.error('Expected an array but got:', data);
-                    setExpenses([]);
-                }
-            } catch (error) {
-                console.error('Error fetching expenses:', error);
-            }
-        };
+        // Check authentication
+        if (!tokenStorage.isLoggedIn()) {
+            navigate('/login');
+            return;
+        }
+
+        // Get user data
+        const userData = tokenStorage.getUserData();
+        setUser(userData);
+
+        // Fetch expenses
         fetchExpenses();
-    }, []);
+    }, [navigate]);
+
+    const fetchExpenses = async () => {
+        try {
+            setIsLoading(true);
+            const data = await expenseAPI.getExpenses();
+            
+            if (Array.isArray(data)) {
+                setExpenses(data);
+            } else {
+                console.error('Expected an array but got:', data);
+                setExpenses([]);
+            }
+        } catch (error) {
+            console.error('Error fetching expenses:', error);
+            if (error.response?.status === 401) {
+                // Token expired or invalid
+                authAPI.logout();
+                navigate('/login');
+            }
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     // Function to add an expense
     const addExpense = async (expense) => {
-        const categorizedExpense = {
-            ...expense,
-            // Use the category directly from the expense object
-            category: expense.category,
-        };
-        console.log("Categorized Expense:", categorizedExpense); // Debugging line
         try {
-            const response = await fetch(`http://localhost:3000/api/expenses`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(categorizedExpense),
-            });
-            console.log("Response from server:", response); // Debugging line
-            if (response.ok) {
-                const newExpense = await response.json();
-                console.log("Added expense:", newExpense); // Log the new expense
-                setExpenses((prevExpenses) => [...prevExpenses, newExpense]); // Update state correctly
-            } else {
-                console.error('Failed to add expense:', response.statusText);
-            }
+            const newExpense = await expenseAPI.addExpense(expense);
+            console.log("Added expense:", newExpense);
+            setExpenses((prevExpenses) => [...prevExpenses, newExpense]);
         } catch (error) {
             console.error('Error adding expense:', error);
+            alert('Failed to add expense. Please try again.');
         }
+    };
+
+    // Function to update an expense
+    const updateExpense = async (id, updatedExpense) => {
+        try {
+            const expense = await expenseAPI.updateExpense(id, updatedExpense);
+            setExpenses((prevExpenses) =>
+                prevExpenses.map((exp) => (exp._id === id ? expense : exp))
+            );
+        } catch (error) {
+            console.error('Error updating expense:', error);
+            alert('Failed to update expense. Please try again.');
+        }
+    };
+
+    // Function to delete an expense
+    const deleteExpense = async (id) => {
+        try {
+            await expenseAPI.deleteExpense(id);
+            setExpenses((prevExpenses) => prevExpenses.filter((exp) => exp._id !== id));
+        } catch (error) {
+            console.error('Error deleting expense:', error);
+            alert('Failed to delete expense. Please try again.');
+        }
+    };
+
+    // Logout function
+    const handleLogout = () => {
+        authAPI.logout();
+        navigate('/login');
     };
 
     // Generate insights and summary
@@ -91,7 +114,7 @@ const Dashboard = () => {
 
     // Prepare data for line chart
     const lineChartData = {
-        labels: expenses.map((expense) => new Date(expense.date).toLocaleDateString()), // Format date for x-axis
+        labels: expenses.map((expense) => new Date(expense.date).toLocaleDateString()),
         datasets: [
             {
                 label: 'Amount Spent',
@@ -115,11 +138,26 @@ const Dashboard = () => {
         ],
     };
 
+    if (isLoading) {
+        return <div className="dashboard loading">Loading...</div>;
+    }
+
     return (
         <div className="dashboard">
-            <h1>Dashboard</h1>
+            <header className="dashboard-header">
+                <h1>Dashboard</h1>
+                <div className="user-info">
+                    <span>Welcome, {user?.username || 'User'}!</span>
+                    <button onClick={handleLogout} className="logout-btn">Logout</button>
+                </div>
+            </header>
+            
             <AddExpenseForm addExpense={addExpense} />
-            <ExpenseList expenses={expenses} />
+            <ExpenseList 
+                expenses={expenses} 
+                onUpdateExpense={updateExpense}
+                onDeleteExpense={deleteExpense}
+            />
 
             <div className="ai-insights">
                 <h2>Insights</h2>
