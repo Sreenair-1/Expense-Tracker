@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const { encrypt, decrypt, isEncrypted } = require('../utils/encryption');
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -33,17 +34,39 @@ const UserSchema = new mongoose.Schema({
     },
 });
 
+// Encrypt sensitive data before saving
 UserSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) return next();
-
     try {
-        const salt = await bcrypt.genSalt(10);
-        this.password = await bcrypt.hash(this.password, salt);
+        // Hash password if modified
+        if (this.isModified('password')) {
+            const salt = await bcrypt.genSalt(10);
+            this.password = await bcrypt.hash(this.password, salt);
+        }
+
+        // Encrypt email and username if not already encrypted
+        if (this.isModified('email') && this.email && !isEncrypted(this.email)) {
+            this.email = encrypt(this.email);
+        }
+        
+        if (this.isModified('username') && this.username && !isEncrypted(this.username)) {
+            this.username = encrypt(this.username);
+        }
+
         next();
     } catch (error) {
         next(error);
     }
 });
+
+// Method to get decrypted user data for responses
+UserSchema.methods.getDecryptedData = function() {
+    return {
+        _id: this._id,
+        username: decrypt(this.username),
+        email: decrypt(this.email),
+        createdAt: this.createdAt
+    };
+};
 
 UserSchema.methods.isValidPassword = async function (password) {
     return await bcrypt.compare(password, this.password);

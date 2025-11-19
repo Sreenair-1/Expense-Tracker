@@ -11,23 +11,124 @@
 .expense-item {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    align-items: center;
+    padding: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #f9f9f9;
 }
 
-.expense-title {
+.expense-details {
+    display: flex;
+    gap: 15px;
+    align-items: center;
     flex: 1;
-    text-align: left;
+}
+
+.expense-title {
+    flex: 2;
+    font-weight: bold;
 }
 
 .expense-amount {
-    flex: 0 0 100px;
+    flex: 1;
     text-align: right;
+    color: #e74c3c;
+    font-weight: bold;
 }
 
 .expense-date {
-    flex: 0 0 120px;
+    flex: 1;
     text-align: right;
+    color: #7f8c8d;
+}
+
+.expense-category {
+    flex: 1;
+    text-align: right;
+    background-color: #3498db;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+}
+
+.expense-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn, .delete-btn, .save-btn, .cancel-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.8em;
+}
+
+.edit-btn {
+    background-color: #3498db;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #2980b9;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+.save-btn {
+    background-color: #27ae60;
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: #219a52;
+}
+
+.cancel-btn {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #7f8c8d;
+}
+
+.expense-edit-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+}
+
+.expense-edit-form input {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+.expense-edit-form input[type="text"] {
+    flex: 2;
+}
+
+.expense-edit-form input[type="number"] {
+    flex: 1;
+}
+
+.expense-edit-form input[type="date"] {
+    flex: 1;
+}
+
+.edit-buttons {
+    display: flex;
+    gap: 5px;
 }

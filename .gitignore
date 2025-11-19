@@ -1,2 +1,4 @@
 node_modules/
 frontend/src/images/
+build/
+dist/
