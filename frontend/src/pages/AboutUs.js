@@ -1,32 +1,30 @@
 import React from 'react';
 import './AboutUs.css';
-import garvitImage from '../images/garvit.jpg';
-import sreeImage from '../images/sree.jpg';
-import manavImage from '../images/manav.jpg';
-import janakImage from '../images/janak.jpg';
 
-
+// Note: Image files are not included in this repository
+// Using placeholder images for team members
+const placeholderImage = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzMzMzMzMyIvPjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+VGVhbTwvdGV4dD48L3N2Zz4=';
 
 const teamMembers = [
   {
     id: 1,
     name: "Garvit Tyagi",
-    image: garvitImage
+    image: placeholderImage
   },
   {
     id: 2,
     name: "Sreehari Nair",
-    image: sreeImage
+    image: placeholderImage
   },
   {
     id: 3,
     name: "Manav Dalwani",
-    image: manavImage
+    image: placeholderImage
   },
   {
     id: 4,
     name: "Janak Fabyani",
-    image: janakImage
+    image: placeholderImage
   }
 ];
 
